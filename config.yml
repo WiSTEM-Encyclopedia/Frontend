@@ -1,0 +1,15 @@
+name: mocki
+port: 3333
+endpoints:
+  - path: /hello
+    method: get
+    responses:
+      - statusCode: 200
+        body:
+          [
+            name: 'Grace Hopper',
+            born: 'December 9, 1906',
+            died: 'January 1, 1992',
+            blurb: 'pioneer of computer programming',
+            description: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
+          ]
