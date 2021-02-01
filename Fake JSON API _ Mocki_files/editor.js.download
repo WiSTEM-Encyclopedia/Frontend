@@ -1,0 +1,55 @@
+const isJsonString = str => {
+  let object;
+  try {
+    object = JSON.parse(str);
+  } catch (e) {
+    return false;
+  }
+  return typeof object === "object";
+};
+
+const statusCodeInput = document.getElementById("status");
+const methodInput = document.getElementById("method");
+const bodyInput = document.getElementById("body");
+const failAlert = document.getElementById("fail");
+const successAlert = document.getElementById("success");
+
+const createApi = () => {
+  successAlert.style.display = "none";
+  failAlert.style.display = "none";
+  const statusCode =
+    statusCodeInput.options[statusCodeInput.selectedIndex].value;
+  const method = methodInput.options[methodInput.selectedIndex].value;
+  const body = bodyInput.value;
+
+  if (isJsonString(body)) {
+    const stringifiedBody = stringifyObject(JSON.parse(body), {
+      singleQuotes: false
+    });
+    fetch("https://api.mocki.io/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        query: `mutation {
+                createStage(stage: { configuration: { endpoints: [ { path: "/", method: "${method}", responses: [{statusCode: ${statusCode}, body: ${stringifiedBody} } ] } ] } }) {
+                  configuration
+                  url
+                }
+              }`
+      })
+    })
+      .then(response => response.json())
+      .then(response => {
+        const { url } = response.data.createStage;
+        successAlert.innerHTML = successAlert.innerHTML.replace(
+          "$API_URL",
+          url
+        );
+        successAlert.style.display = "block";
+      });
+  } else {
+    failAlert.style.display = "block";
+  }
+};
