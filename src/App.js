@@ -5,6 +5,7 @@ import {
   Divider,
 } from 'antd';
 import './App.less';
+import WomenList from './components/WomenList';
 
 const { Title } = Typography;
 
@@ -24,6 +25,9 @@ const App = () => (
     </section>
     {/* <h4>Our goal is to inspire women and girls everywhere by showing them the women that paved the way</h4> */}
     <Divider style={{ marginBottom: 60 }}>Notable Women</Divider>
+    <div>
+      <WomenList />
+    </div>
   </>
 );
 
