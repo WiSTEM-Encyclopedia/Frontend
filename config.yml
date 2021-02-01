@@ -1,7 +1,7 @@
 name: mocki
-port: 3000
+port: 3333
 endpoints:
-  - path: /women
+  - path: /hello
     method: get
     responses:
       - statusCode: 200
