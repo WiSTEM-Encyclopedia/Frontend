@@ -10,11 +10,16 @@ function WomenList() {
 
     const [womanState, setWomanState] = useState([])
 
-    axios.get(apiURL)
-        .then((res) => {
-            console.log("Retrieved data from api")
-            setWomanState(res.data)
-        })
+    useEffect(() => {
+        axios.get(apiURL)
+            .then((res) => {
+                console.log("Retrieved data from api")
+                setWomanState(res.data)
+            })
+            .res((err) => {
+                console.log("Error: ", err)
+            })
+    }, []);
 
     return (
       <div className="woman-list">
