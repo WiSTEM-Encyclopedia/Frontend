@@ -1,6 +1,7 @@
 # Frontend
 
-Built using create react app + ant design components
+###### Built using create react app + ant design components
+Stage 1 of this project, which is currently in progress, is to create a sort of encyclopedia of notable women in STEM
 
 ### Current to-do list
 - [ ] Nav bar 
